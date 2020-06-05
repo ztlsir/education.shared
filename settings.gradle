@@ -1,0 +1,2 @@
+rootProject.name = 'education-shared'
+include 'education-shared-value','education-shared-model','education-shared-event','education-shared-validation'

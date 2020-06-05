@@ -1,0 +1,37 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+jar {
+    enabled = true
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier = 'sources'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            groupId = rootProject.group
+            artifactId = rootProject.modelArtifact
+            version = rootProject.modelVersion
+            artifact sourcesJar{
+                classifier "sources"
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url = "http://localhost:1001/repository/maven-snapshots/"
+            credentials {
+                username 'upload'
+                password '123456'
+            }
+        }
+    }
+}

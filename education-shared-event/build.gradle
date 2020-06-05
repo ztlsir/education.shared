@@ -1,0 +1,43 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.0'
+}
+
+jar {
+    enabled = true
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier = 'sources'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            groupId = rootProject.group
+            artifactId = rootProject.eventArtifact
+            version = rootProject.eventVersion
+            artifact sourcesJar{
+                classifier "sources"
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url = "http://localhost:1001/repository/maven-snapshots/"
+            credentials {
+                username 'upload'
+                password '123456'
+            }
+        }
+    }
+}
