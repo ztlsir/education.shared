@@ -3,6 +3,10 @@ plugins {
     id 'maven-publish'
 }
 
+dependencies {
+    implementation 'com.ztlsir:education-shared-event:0.0.1-20200605.031946-4'
+}
+
 jar {
     enabled = true
 }
