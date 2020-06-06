@@ -7,6 +7,7 @@ import lombok.Getter;
 public class HomeworkResultCreatedEvent extends DomainEvent {
     private String homeworkResultId;
 
+    public HomeworkResultCreatedEvent(){}
     public HomeworkResultCreatedEvent(String homeworkResultId) {
         this.homeworkResultId = homeworkResultId;
     }
